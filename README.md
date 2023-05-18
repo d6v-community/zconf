@@ -44,75 +44,117 @@ optional and can be either a string or a boolean, respectively.
 
 ZCONF provides the following API:
 
-`zconf(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>` Detects, parses
-and validates a configuration file using the given Zod schema. Returns an object
+```ts
+zconf(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>
+```
+
+Detects, parses and validates a configuration file using the given Zod schema.
+Returns an object with the parsed values if the object is valid, or throws an
+error with a detailed error message if the object is invalid.
+
+```ts
+zjson(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>
+```
+
+Parses and validates a JSON file using the given Zod schema. Returns an object
 with the parsed values if the object is valid, or throws an error with a
 detailed error message if the object is invalid.
 
-`zjson(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>` Parses and
-validates a JSON file using the given Zod schema. Returns an object with the
-parsed values if the object is valid, or throws an error with a detailed error
-message if the object is invalid.
+```ts
+zyaml(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>
+```
 
-`zyaml(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>` Parses and
-validates a YAML file using the given Zod schema. Returns an object with the
-parsed values if the object is valid, or throws an error with a detailed error
-message if the object is invalid.
+Parses and validates a YAML file using the given Zod schema. Returns an object
+with the parsed values if the object is valid, or throws an error with a
+detailed error message if the object is invalid.
 
-`ztoml(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>` Parses and
-validates a TOML file using the given Zod schema. Returns an object with the
-parsed values if the object is valid, or throws an error with a detailed error
-message if the object is invalid.
+```ts
+ztoml(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>
+```
 
-`zjsonc(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>` Parses and
-validates a JSONC file using the given Zod schema. Returns an object with the
-parsed values if the object is valid, or throws an error with a detailed error
-message if the object is invalid.
+Parses and validates a TOML file using the given Zod schema. Returns an object
+with the parsed values if the object is valid, or throws an error with a
+detailed error message if the object is invalid.
 
-`zxml(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>` Parses and
-validates an XML file using the given Zod schema. Returns an object with the
-parsed values if the object is valid, or throws an error with a detailed error
-message if the object is invalid.
+```ts
+zjsonc(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>
+```
 
-`zini(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>` Parses and
-validates an INI file using the given Zod schema. Returns an object with the
-parsed values if the object is valid, or throws an error with a detailed error
-message if the object is invalid.
+Parses and validates a JSONC file using the given Zod schema. Returns an object
+with the parsed values if the object is valid, or throws an error with a
+detailed error message if the object is invalid.
 
-`zconfFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>`
+```ts
+zxml(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>
+```
+
+Parses and validates an XML file using the given Zod schema. Returns an object
+with the parsed values if the object is valid, or throws an error with a
+detailed error message if the object is invalid.
+
+```ts
+zini(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>
+```
+
+Parses and validates an INI file using the given Zod schema. Returns an object
+with the parsed values if the object is valid, or throws an error with a
+detailed error message if the object is invalid.
+
+```ts
+zconfFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>
+```
+
 Detects, parses and validates a string using the given Zod schema. Returns an
 object with the parsed values if the object is valid, or throws an error with a
 detailed error message if the object is invalid.
 
-`zjsonFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>`
+```ts
+zjsonFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>
+```
+
 Parses and validates a JSON string using the given Zod schema. Returns an object
 with the parsed values if the object is valid, or throws an error with a
 detailed error message if the object is invalid.
 
-`zyamlFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>`
+```ts
+zyamlFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>
+```
+
 Parses and validates a YAML string using the given Zod schema. Returns an object
 with the parsed values if the object is valid, or throws an error with a
 detailed error message if the object is invalid.
 
-`ztomlFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>`
+```ts
+ztomlFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>
+```
+
 Parses and validates a TOML string using the given Zod schema. Returns an object
 with the parsed values if the object is valid, or throws an error with a
 detailed error message if the object is invalid.
 
-`zjsoncFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>`
+```ts
+zjsoncFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>
+```
+
 Parses and validates a JSONC string using the given Zod schema. Returns an
 object with the parsed values if the object is valid, or throws an error with a
 detailed error message if the object is invalid.
 
-`zxmlFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>` Parses
-and validates an XML string using the given Zod schema. Returns an object with
-the parsed values if the object is valid, or throws an error with a detailed
-error message if the object is invalid.
+```ts
+zxmlFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>
+```
 
-`ziniFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>` Parses
-and validates an INI string using the given Zod schema. Returns an object with
-the parsed values if the object is valid, or throws an error with a detailed
-error message if the object is invalid.
+Parses and validates an XML string using the given Zod schema. Returns an object
+with the parsed values if the object is valid, or throws an error with a
+detailed error message if the object is invalid.
+
+```ts
+ziniFromString(schema: z.ZodSchema, data: string): z.infer<z.ZodSchema>
+```
+
+Parses and validates an INI string using the given Zod schema. Returns an object
+with the parsed values if the object is valid, or throws an error with a
+detailed error message if the object is invalid.
 
 ## License
 

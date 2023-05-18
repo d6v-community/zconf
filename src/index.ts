@@ -1,11 +1,11 @@
 import { readFile } from "fs/promises";
-import { canParseIni, zini, ziniFromString } from "parsers/ini";
-import { canParseJson, zjson, zjsonFromString } from "parsers/json";
-import { canParseJsonC, zjsonc, zjsoncFromString } from "parsers/jsonc";
-import { canParseToml, ztoml, ztomlFromString } from "parsers/toml";
-import { canParseXml, zxml, zxmlFromString } from "parsers/xml";
-import { canParseYaml, zyaml, zyamlFromString } from "parsers/yaml";
 import { z } from "zod";
+import { canParseIni, zini, ziniFromString } from "./parsers/ini";
+import { canParseJson, zjson, zjsonFromString } from "./parsers/json";
+import { canParseJsonC, zjsonc, zjsoncFromString } from "./parsers/jsonc";
+import { canParseToml, ztoml, ztomlFromString } from "./parsers/toml";
+import { canParseXml, zxml, zxmlFromString } from "./parsers/xml";
+import { canParseYaml, zyaml, zyamlFromString } from "./parsers/yaml";
 
 
 export { z, zini, ziniFromString, zjson, zjsonFromString, zjsonc, zjsoncFromString, ztoml, ztomlFromString, zxml, zxmlFromString, zyaml, zyamlFromString };
