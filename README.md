@@ -210,5 +210,5 @@ ziniSync(schema: z.ZodSchema, path: string): z.infer<z.ZodSchema>
 
 ## License
 
-ZENV is licensed under the MIT License. See the LICENSE file for more
+ZCONF is licensed under the MIT License. See the LICENSE file for more
 information.
