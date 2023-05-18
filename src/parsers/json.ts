@@ -1,4 +1,5 @@
-import { readFile } from 'fs/promises';
+import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { z } from "zod";
 
 export function canParseJson (text: string) {
@@ -30,5 +31,10 @@ export function zjsonFromString<T extends z.Schema> (schema: T, text: string) {
 }
 export async function zjson<T extends z.Schema> (schema: T, path: string) {
     const text = await readFile(path, 'utf8');
+    return zjsonFromString(schema, text);
+}
+
+export function zjsonSync<T extends z.Schema> (schema: T, path: string) {
+    const text = readFileSync(path, 'utf8');
     return zjsonFromString(schema, text);
 }

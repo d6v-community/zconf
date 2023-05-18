@@ -1,14 +1,35 @@
-import { readFile } from "fs/promises";
+import { readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
 import { z } from "zod";
-import { canParseIni, zini, ziniFromString } from "./parsers/ini";
-import { canParseJson, zjson, zjsonFromString } from "./parsers/json";
-import { canParseJsonC, zjsonc, zjsoncFromString } from "./parsers/jsonc";
-import { canParseToml, ztoml, ztomlFromString } from "./parsers/toml";
-import { canParseXml, zxml, zxmlFromString } from "./parsers/xml";
-import { canParseYaml, zyaml, zyamlFromString } from "./parsers/yaml";
+import { canParseIni, zini, ziniFromString, ziniSync } from "./parsers/ini";
+import { canParseJson, zjson, zjsonFromString, zjsonSync } from "./parsers/json";
+import { canParseJsonC, zjsonc, zjsoncFromString, zjsoncSync } from "./parsers/jsonc";
+import { canParseToml, ztoml, ztomlFromString, ztomlSync } from "./parsers/toml";
+import { canParseXml, zxml, zxmlFromString, zxmlSync } from "./parsers/xml";
+import { canParseYaml, zyaml, zyamlFromString, zyamlSync } from "./parsers/yaml";
 
 
-export { z, zini, ziniFromString, zjson, zjsonFromString, zjsonc, zjsoncFromString, ztoml, ztomlFromString, zxml, zxmlFromString, zyaml, zyamlFromString };
+export {
+    z,
+    zini,
+    ziniFromString,
+    ziniSync,
+    zjson,
+    zjsonFromString,
+    zjsonSync,
+    zjsonc,
+    zjsoncFromString,
+    zjsoncSync,
+    ztoml,
+    ztomlFromString,
+    ztomlSync,
+    zxml,
+    zxmlFromString,
+    zxmlSync,
+    zyaml,
+    zyamlFromString,
+    zyamlSync
+};
 export function zconfFromString<T extends z.Schema> (schema: T, text: string) {
     if (canParseToml(text)) {
         return ztomlFromString(schema, text);
@@ -53,3 +74,26 @@ export async function zconf<T extends z.Schema> (schema: T, path: string) {
     return zconfFromString(schema, text);
 }
 
+
+export function zconfSync<T extends z.Schema> (schema: T, path: string) {
+    if (path.endsWith('.yml') || path.endsWith('.yaml')) {
+        return zyamlSync(schema, path);
+    }
+    if (path.endsWith('.toml')) {
+        return ztomlSync(schema, path);
+    }
+    if (path.endsWith('.json')) {
+        return zjsonSync(schema, path);
+    }
+    if (path.endsWith('.xml')) {
+        return zxmlSync(schema, path);
+    }
+    if (path.endsWith('.ini')) {
+        return ziniSync(schema, path);
+    }
+    if (path.endsWith('.jsonc')) {
+        return zjsoncSync(schema, path);
+    }
+    const text = readFileSync(path, 'utf8');
+    return zconfFromString(schema, text);
+}

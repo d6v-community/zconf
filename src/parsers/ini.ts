@@ -1,5 +1,6 @@
-import { readFile } from 'fs/promises';
 import { parse } from 'ini';
+import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { z } from "zod";
 
 export function canParseIni (text: string) {
@@ -31,5 +32,9 @@ export function ziniFromString<T extends z.Schema> (schema: T, text: string) {
 }
 export async function zini<T extends z.Schema> (schema: T, path: string) {
     const text = await readFile(path, 'utf8');
+    return ziniFromString(schema, text);
+}
+export function ziniSync<T extends z.Schema> (schema: T, path: string) {
+    const text = readFileSync(path, 'utf8');
     return ziniFromString(schema, text);
 }

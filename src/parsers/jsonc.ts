@@ -1,5 +1,6 @@
-import { readFile } from 'fs/promises';
 import { parse } from 'jsonc-parser';
+import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { z } from "zod";
 
 export function canParseJsonC (text: string) {
@@ -31,5 +32,9 @@ export function zjsoncFromString<T extends z.Schema> (schema: T, text: string) {
 }
 export async function zjsonc<T extends z.Schema> (schema: T, path: string) {
     const text = await readFile(path, 'utf8');
+    return zjsoncFromString(schema, text);
+}
+export function zjsoncSync<T extends z.Schema> (schema: T, path: string) {
+    const text = readFileSync(path, 'utf8');
     return zjsoncFromString(schema, text);
 }

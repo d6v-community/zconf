@@ -1,4 +1,5 @@
-import { readFile } from 'fs/promises';
+import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import * as toml from 'toml';
 import { z } from "zod";
 
@@ -31,5 +32,9 @@ export function ztomlFromString<T extends z.Schema> (schema: T, text: string) {
 }
 export async function ztoml<T extends z.Schema> (schema: T, path: string) {
     const text = await readFile(path, 'utf8');
+    return ztomlFromString(schema, text);
+}
+export function ztomlSync<T extends z.Schema> (schema: T, path: string) {
+    const text = readFileSync(path, 'utf8');
     return ztomlFromString(schema, text);
 }

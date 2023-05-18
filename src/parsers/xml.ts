@@ -1,5 +1,6 @@
 import * as xml from 'fast-xml-parser';
-import { readFile } from 'fs/promises';
+import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import { z } from "zod";
 export function canParseXml (text: string) {
     try {
@@ -31,5 +32,9 @@ export function zxmlFromString<T extends z.Schema> (schema: T, text: string) {
 }
 export async function zxml<T extends z.Schema> (schema: T, path: string) {
     const text = await readFile(path, 'utf8');
+    return zxmlFromString(schema, text);
+}
+export function zxmlSync<T extends z.Schema> (schema: T, path: string) {
+    const text = readFileSync(path, 'utf8');
     return zxmlFromString(schema, text);
 }

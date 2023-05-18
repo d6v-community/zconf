@@ -1,4 +1,5 @@
-import { readFile } from 'fs/promises';
+import { readFileSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
 import * as yaml from 'yaml';
 import { z } from "zod";
 
@@ -30,5 +31,9 @@ export function zyamlFromString<T extends z.Schema> (schema: T, text: string) {
 }
 export async function zyaml<T extends z.Schema> (schema: T, path: string) {
     const text = await readFile(path, 'utf8');
+    return zyamlFromString(schema, text);
+}
+export function zyamlSync<T extends z.Schema> (schema: T, path: string) {
+    const text = readFileSync(path, 'utf8');
     return zyamlFromString(schema, text);
 }
